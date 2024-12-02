@@ -12,7 +12,6 @@ public class HistorianHysteria {
     private int similarityScore = 0;
 
     private void getListData() throws IOException {
-        System.out.println("getListData");
         String filePath = "/Users/leathamg/development/adventOfCode2024/src/day_one_location_data.txt";
         FileReader fr = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fr);
@@ -32,7 +31,6 @@ public class HistorianHysteria {
     }
 
     private void calculateDistance() {
-        System.out.println("calculateDistance");
         for (int i = 0; i < leftList.size(); i++) {
             int diff = 0;
             if (leftList.get(i) > rightList.get(i)) {
@@ -45,9 +43,6 @@ public class HistorianHysteria {
     }
 
     private void calculateSimilarity() {
-        System.out.println("calculateSimilarity");
-        //int currentNumber;
-        //int numInRightList = 0;
         int i = 0;
 
         while (!leftList.isEmpty()) {
@@ -69,7 +64,6 @@ public class HistorianHysteria {
     }
 
     public int run() throws IOException {
-        System.out.println("Running...");
         this.getListData();
         this.sortLists();
         this.calculateDistance();
