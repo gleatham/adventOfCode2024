@@ -8,11 +8,11 @@ import java.lang.Math;
 public class HistorianHysteria {
     private ArrayList<Integer> leftList = new ArrayList<Integer>();
     private ArrayList<Integer> rightList = new ArrayList<Integer>();
-
-    //private int[] differenceList = new int[999];
     private int finalDistance;
+    private int similarityScore = 0;
 
     private void getListData() throws IOException {
+        System.out.println("getListData");
         String filePath = "/Users/leathamg/development/adventOfCode2024/src/day_one_location_data.txt";
         FileReader fr = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fr);
@@ -32,6 +32,7 @@ public class HistorianHysteria {
     }
 
     private void calculateDistance() {
+        System.out.println("calculateDistance");
         for (int i = 0; i < leftList.size(); i++) {
             int diff = 0;
             if (leftList.get(i) > rightList.get(i)) {
@@ -44,25 +45,27 @@ public class HistorianHysteria {
     }
 
     private void calculateSimilarity() {
-        System.out.println("Derp");
-        int currentNumber;
-        int numInLeftList = 0;
-        int numInRightList = 0;
+        System.out.println("calculateSimilarity");
+        //int currentNumber;
+        //int numInRightList = 0;
         int i = 0;
 
         while (!leftList.isEmpty()) {
-            currentNumber = leftList.get(i);
-            numInLeftList += 1;
-            for (int num : leftList) {
+            int currentNumber = leftList.getFirst();
+            int numInRightList = 0;
+            for (int num : rightList) {
                 if (num == currentNumber) {
-                    numInLeftList += 1;
+                    numInRightList += 1;
                 }
             }
-            rightList.remove(currentNumber);
-            i = 0;
+            int score = currentNumber * numInRightList;
+            this.similarityScore += score;
+            this.leftList.removeFirst();
+            i++;
+            System.out.println(i);
+
         }
-        System.out.println("Left: " + numInLeftList);
-        //if no more of same number exist in left list rightList.remove(number)
+        System.out.println("SimScore: " + this.similarityScore);
     }
 
     public int run() throws IOException {
@@ -70,6 +73,7 @@ public class HistorianHysteria {
         this.getListData();
         this.sortLists();
         this.calculateDistance();
+        this.calculateSimilarity();
         return this.finalDistance;
     }
 }
