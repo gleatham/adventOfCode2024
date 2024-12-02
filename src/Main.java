@@ -6,6 +6,7 @@ public class Main {
         int totalDistance;
         try {
             totalDistance = hst.run();
+            System.out.println("Total Distance: " + totalDistance);
         }
         catch (Exception e) {
             e.printStackTrace();
